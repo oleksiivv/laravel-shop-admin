@@ -63,9 +63,9 @@ class WorkerController extends Controller
         return redirect("/api/worker/$workerId");
     }
 
-    public function update(int $id, int $shopId, int $specialityId, UpdateWorkerRequest $request)
+    public function update(int $id, UpdateWorkerRequest $request)
     {
-        $workerId = $this->workerRepository->update($id, $request->validated(), shopId: $shopId, specialityId: $specialityId)->id;
+        $workerId = $this->workerRepository->update($id, $request->toArray())->id;
 
         return redirect("/api/worker/$workerId");
     }

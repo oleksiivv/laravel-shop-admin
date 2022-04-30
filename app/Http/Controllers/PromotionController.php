@@ -54,9 +54,11 @@ class PromotionController extends Controller
         return redirect("/api/promotion/$promotionId");
     }
 
-    public function update(int $id, int $cartItemId, UpdatePromotionRequest $request)
+    public function update(int $id, UpdatePromotionRequest $request)
     {
-        $this->promotionRepository->update($id, $request->toArray(), $cartItemId);
+        $promotionId = $this->promotionRepository->update($id, $request->toArray())->id;
+
+        return redirect("/api/promotion/$promotionId");
     }
 
     public function delete(int $id)

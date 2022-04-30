@@ -55,6 +55,7 @@
         @isset($singleCartItem)
             <h1>Cart Item - {{$singleCartItem->product->name}}</h1>
             <h4>${{ $singleCartItem->price }}</h4>
+            <h4>Product price: ${{ $singleCartItem->product->current_price }}</h4>
             <h4>Cart: <a href="/api/cart/{{$singleCartItem->cart_id}}">{{ $singleCartItem->cart_id }}: {{$singleCartItem->cart->status}}</a></h4>
 
             <h6>Promotions</h6>
@@ -63,11 +64,24 @@
                         <li>Coupon: {{$promotion->coupon}}. Description: <i>{{$promotion->description}}</i></li>
                 @endforeach
                 </ol>
+
+            <div class="alert alert-dark">
+                <h3>Update</h3>
+                <form method="POST" action="/api/cart-item/{{$singleCartItem->id}}/update">
+                    @csrf
+                    <input type="number" name="price" class="form-control" placeholder="Current price: "/>
+                    </br>
+                    <input type="submit" class="btn btn-success"/>
+                </form>
+            </div>
         @endisset
         <hr/>
         @isset($currentCart)
             @isset($currentProduct)
                 <div class="alert alert-dark">
+                    <h4>Cart: <a href="/api/cart/{{$currentCart->id}}">{{ $currentCart->id }}: {{$currentCart->status}}</a></h4>
+                    <h4>Product: <a href="/api/product/{{$currentProduct->id}}">{{$currentProduct->name}}</a></h4>
+                    <h4>Product price: ${{ $currentProduct->current_price }}</h4>
                     <h3>Create new cart item</h3>
                     <form method="POST" action="/api/cart-item/cart/{{$currentCart->id}}/product/{{$currentProduct->id}}/create">
                         @csrf

@@ -77,7 +77,9 @@ class CartItemController extends Controller
 
     public function update(int $id, UpdateCartRequest $request)
     {
-        $this->cartItemRepository->update($id, $request->toArray());
+        $cartItemId = $this->cartItemRepository->update($id, $request->toArray())->id;
+
+        return redirect("api/cart-item/$cartItemId");
     }
 
     public function createWithCart(int $cartId, int $productId, CreateCartItemRequest $request)

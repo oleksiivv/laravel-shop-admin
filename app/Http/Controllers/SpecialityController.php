@@ -40,7 +40,7 @@ class SpecialityController extends Controller
 
     public function update(int $id, UpdateSpecialityRequest $request)
     {
-        $specialityId = $this->specialityRepository->update($id, $request->validated())->id;
+        $specialityId = $this->specialityRepository->update($id, $request->toArray())->id;
 
         return redirect("/api/worker-speciality/$specialityId");
     }

@@ -49,7 +49,14 @@ class CartController extends Controller
 
     public function update(int $id, UpdateCartRequest $request)
     {
-        $this->cartRepository->update($id, $request->validated());
+        $cartId = $this->cartRepository->update(
+            $id,
+            $request->toArray(),
+            $this->workerRepository->getWorkerByEmail($request->toArray()['seller_email'])->id,
+            $this->customerRepository->getCustomerByEmail($request->toArray()['customer_email'])->id,
+        )->id;
+
+        return redirect("api/cart/$cartId");
     }
 
     public function delete(int $id)

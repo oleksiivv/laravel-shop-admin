@@ -100,7 +100,9 @@ class ProductRepository
         $product = Product::where('id', $id)->first();
         $product->fill($data);
 
-        $product->category_id = $categoryId;
+        $product->information = json_encode([
+            'description' => $data['description'],
+        ]);
 
         $product->save();
 

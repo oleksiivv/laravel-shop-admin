@@ -47,7 +47,7 @@ Route::prefix('worker')->group(function () {
     Route::get('/shop/{shopId}', [WorkerController::class, 'getWorkersByShop'])->whereNumber('shopId');
     Route::get('/shop/{shopId}/speciality/{specialityId}', [WorkerController::class, 'getWorkersByShopAndSpeciality'])->whereNumber('shopId');
     Route::post('/shop/{shopId}/speciality/{specialityId}/create', [WorkerController::class, 'create'])->whereNumber('shopId')->whereNumber('specialityId');
-    Route::post('/{id}/shop/{shopId}/speciality/{specialityId}/create', [WorkerController::class, 'update'])->whereNumber('shopId')->whereNumber('specialityId')->whereNumber('id');
+    Route::post('/{id}/update', [WorkerController::class, 'update'])->whereNumber('id');
 
     Route::delete('/{id}', [WorkerController::class, 'delete'])->whereNumber('id');
 });
@@ -139,7 +139,7 @@ Route::prefix('cart-item')->group(function () {
     Route::post('/cart/{cartId}/update', [CartItemController::class, 'updateWithCart'])->whereNumber('cartId');
 
     Route::post('/create', [CartItemController::class, 'create']);
-    Route::post('/update', [CartItemController::class, 'update']);
+    Route::post('/{id}/update', [CartItemController::class, 'update'])->whereNumber('id');
 
     Route::delete('/{id}', [CartItemController::class, 'delete'])->whereNumber('id');
     Route::delete('/{id}/promotions', [CartItemController::class, 'deletePromotions'])->whereNumber('id');
@@ -151,7 +151,7 @@ Route::prefix('promotion')->group(function () {
 
     Route::get('/cart-item/{cartItemId}', [PromotionController::class, 'getPromotionsForCartItem'])->whereNumber('cartItemId');
     Route::post('/cart-item/{cartItemId}/create', [PromotionController::class, 'create'])->whereNumber('cartItemId');
-    Route::post('/cart-item/{cartItemId}/update', [PromotionController::class, 'update'])->whereNumber('cartItemId');
+    Route::post('/{id}/update', [PromotionController::class, 'update'])->whereNumber('id');
 
     Route::delete('/{id}', [PromotionController::class, 'delete'])->whereNumber('id');
 });

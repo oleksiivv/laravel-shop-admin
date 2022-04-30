@@ -64,13 +64,10 @@ class WorkerRepository
         return $worker;
     }
 
-    public function update(int $id, array $data, int $shopId = null, int $specialityId = null): Worker
+    public function update(int $id, array $data): Worker
     {
         $worker = Worker::where('id', $id)->first();
         $worker->fill($data);
-
-        $worker->shop_id = $shopId;
-        $worker->speciality_id = $specialityId;
 
         $worker->save();
 

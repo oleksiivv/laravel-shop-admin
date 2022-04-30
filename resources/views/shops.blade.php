@@ -33,7 +33,7 @@
             @endforeach
             <div class="alert alert-dark">
                 <h3>Create new shop</h3>
-                <form method="POST" action="shop/create">
+                <form method="POST" action="/api/shop/create">
                     @csrf
                     <input type="text" name="address" class="form-control" placeholder="Address: "/>
                     </br>
@@ -45,6 +45,15 @@
         @isset($singleShop)
             <h2>{{ $singleShop->address }}</h2>
             <h3>{{ $singleShop->created_at }}</h3>
+            <div class="alert alert-dark">
+                <h3>Update</h3>
+                <form method="POST" action="/api/shop/{{$singleShop->id}}/update">
+                    @csrf
+                    <input type="text" name="address" class="form-control" placeholder="Address: "/>
+                    </br>
+                    <input type="submit" class="btn btn-success"/>
+                </form>
+            </div>
         @endisset
         <hr/>
         @isset($specialities)

@@ -48,7 +48,17 @@
         @isset($singleCategory)
             <h3>{{ $singleCategory->name }}</h3>
             <h5>{{ $singleCategory->description }}</h5>
-            <!-- There will be edit form -->
+            <div class="alert alert-dark">
+                <h3>Update</h3>
+                <form method="POST" action="/api/product-category/{{$singleCategory->id}}/update">
+                    @csrf
+                    <input type="text" name="name" class="form-control" placeholder="Title: "/>
+                    </br>
+                    <input type="text" name="description" class="form-control" placeholder="Description: "/>
+                    </br>
+                    <input type="submit" class="btn btn-success"/>
+                </form>
+            </div>
         @endisset
         @isset($products)
             <h1>Products</h1>

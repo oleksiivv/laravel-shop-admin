@@ -45,7 +45,15 @@
         @endisset
         @isset($singleSpeciality)
             <h3>{{ $singleSpeciality->speciality_name }}</h3>
-            <!-- There will be edit form -->
+            <div class="alert alert-dark">
+                <h3>Update</h3>
+                <form method="POST" action="/api/worker-speciality/{{$singleSpeciality->id}}/update">
+                    @csrf
+                    <input type="text" name="speciality_name" class="form-control" placeholder="First name: "/>
+                    </br>
+                    <input type="submit" class="btn btn-success"/>
+                </form>
+            </div>
         @endisset
     </body>
 </html>

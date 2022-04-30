@@ -38,6 +38,21 @@
             <h4>{{ $singleWorker->email }}</h4>
             <h4>{{ $singleWorker->month_of_experience }}</h4>
             <h4>{{ $singleWorker->speciality->speciality_name }}</h4>
+            <div class="alert alert-dark">
+                <h3>Update</h3>
+                <form method="POST" action="/api/worker/{{$singleWorker->id}}/update">
+                    @csrf
+                    <input type="text" name="first_name" class="form-control" placeholder="First name: "/>
+                    </br>
+                    <input type="text" name="last_name" class="form-control" placeholder="Last name: "/>
+                    </br>
+                    <input type="email" name="email" class="form-control" placeholder="Email: "/>
+                    </br>
+                    <input type="text" name="month_of_experience" class="form-control" placeholder="Month of experience: "/>
+                    </br>
+                    <input type="submit" class="btn btn-success"/>
+                </form>
+            </div>
         @endisset
         <hr/>
         @isset($shops)

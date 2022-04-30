@@ -43,6 +43,8 @@
                     </br>
                     <input type="text" name="address" class="form-control" placeholder="Address: "/>
                     </br>
+                    <input type="url" name="address" class="form-control" placeholder="Site: "/>
+                    </br>
                     <input type="submit" class="btn btn-success"/>
                 </form>
             </div>
@@ -51,7 +53,22 @@
             <h3>{{ $singleManufacturer->name }}</h3>
             <h4>Raiting: {{ $singleManufacturer->raiting }}</h4>
             <h5>{{ $singleManufacturer->information }}</h5>
-            <!-- There will be edit form -->
+
+            <div class="alert alert-dark">
+                <h3>Update</h3>
+                <form method="POST" action="/api/product-manufacturer/{{$singleManufacturer->id}}/update">
+                    @csrf
+                    <input type="text" name="name" class="form-control" placeholder="Title: "/>
+                    </br>
+                    <input type="number" name="raiting" min="0.0" max="5.0" step="0.05" class="form-control" placeholder="Raiting: "/>
+                    </br>
+                    <input type="text" name="address" class="form-control" placeholder="Address: "/>
+                    </br>
+                    <input type="url" name="site" class="form-control" placeholder="Site: "/>
+                    </br>
+                    <input type="submit" class="btn btn-success"/>
+                </form>
+            </div>
         @endisset
         @isset($products)
             <h1>Products</h1>

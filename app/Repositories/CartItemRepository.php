@@ -40,14 +40,14 @@ class CartItemRepository
         return $cartItem;
     }
 
-    public function update(int $id, array $data, int $cartId = null): void
+    public function update(int $id, array $data, int $cartId = null): CartItem
     {
         $cartItem = CartItem::where('id', $id)->first();
         $cartItem->fill($data);
 
-        $cartItem->cart_id = $cartId;
-
         $cartItem->save();
+
+        return $cartItem;
     }
 
     public function delete(int $id)

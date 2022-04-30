@@ -38,7 +38,7 @@ class CustomerController extends Controller
 
     public function update(int $id, UpdateCustomerRequest $request)
     {
-        $customerId = $this->customerRepository->update($id, $request->validated())->id;
+        $customerId = $this->customerRepository->update($id, $request->toArray())->id;
 
         return redirect("/api/customer/$customerId");
     }
