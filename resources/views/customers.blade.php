@@ -63,7 +63,19 @@
                     <li><a href="/api/order/{{$order->id}}">Order {{$order->id}}: {{$order->status}}</a></li>
                 @endforeach
             </ul>
-            <!-- There will be edit form -->
+            <div class="alert alert-dark">
+                <h3>Update</h3>
+                <form method="POST" action="/api/customer/{{$singleCustomer->id}}/update">
+                    @csrf
+                    <input type="text" name="first_name" class="form-control" placeholder="First name: "/>
+                    </br>
+                    <input type="text" name="last_name" class="form-control" placeholder="Last name: "/>
+                    </br>
+                    <input type="email" name="email" class="form-control" placeholder="Email: "/>
+                    </br>
+                    <input type="submit" class="btn btn-success"/>
+                </form>
+            </div>
         @endisset
     </body>
 </html>

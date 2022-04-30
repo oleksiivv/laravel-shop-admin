@@ -41,6 +41,19 @@
             <h4>Category: {{ $singleProduct->productCategory->name }}</h4>
             <h4>Guarantee: {{ $singleProduct->productGuarantee->name }}</h4>
             <h4>Manufacturer: {{ $singleProduct->productManufacturer->name }} with raiting {{ $singleProduct->productManufacturer->raiting }}</h4>
+            <div class="alert alert-dark">
+                <h3>Update</h3>
+                <form method="POST" action="/api/product/{{$singleProduct->id}}/update">
+                    @csrf
+                    <input type="text" name="name" class="form-control" placeholder="Title: "/>
+                    </br>
+                    <input type="text" name="description" class="form-control" placeholder="Description: "/>
+                    </br>
+                    <input type="number" name="current_price" class="form-control" placeholder="Current price: "/>
+                    </br>
+                    <input type="submit" class="btn btn-success"/>
+                </form>
+            </div>
         @endisset
         <hr/>
         @isset($categories)

@@ -45,14 +45,14 @@ class PromotionRepository
         return $promotion;
     }
 
-    public function update(int $id, array $data, int $cartItemId = null): void
+    public function update(int $id, array $data): Promotion
     {
         $promotion = Promotion::where('id', $id)->first();
         $promotion->fill($data);
 
-        $promotion->cart_item_id = $cartItemId;
-
         $promotion->save();
+
+        return $promotion;
     }
 
     public function delete(int $id)

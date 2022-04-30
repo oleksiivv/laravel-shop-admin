@@ -40,12 +40,15 @@ class CartRepository
         return $cart;
     }
 
-    public function update(int $id, array $data): void
+    public function update(int $id, array $data, int $seller_id, int $customer_id): Cart
     {
         $cart = Cart::where('id', $id)->first();
-        $cart->fill($data);
+        $cart->seller_id = $seller_id;
+        $cart->customer_id = $customer_id;
 
         $cart->save();
+
+        return $cart;
     }
 
     public function delete(int $id)

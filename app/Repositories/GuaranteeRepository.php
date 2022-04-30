@@ -42,6 +42,9 @@ class GuaranteeRepository
         $guarantee = ProductGuarantee::where('id', $id)->first();
         $guarantee->fill($data);
 
+        $guarantee->valid_from = Carbon::parse($data['valid_from']);
+        $guarantee->valid_till = Carbon::parse($data['valid_till']);
+
         $guarantee->save();
 
         return $guarantee;

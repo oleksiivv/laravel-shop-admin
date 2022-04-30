@@ -42,7 +42,7 @@ class ShopController extends Controller
 
     public function update(int $id, UpdateShopRequest $request)
     {
-        $this->shopRepository->update($id, $request->validated());
+        $this->shopRepository->update($id, $request->toArray());
 
         return redirect("/api/shop/$id");
     }

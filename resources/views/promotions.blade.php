@@ -54,6 +54,20 @@
             <h3>Amount: ${{$singlePromotion->amount}}</h3>
             <h4>Item: <a href="/api/cart-item/{{$singlePromotion->cartItem->id}}">{{$singlePromotion->cartItem->product->name}}</a></h4>
             <p>{{$singlePromotion->description}}</p>
+
+            <div class="alert alert-dark">
+                <h3>Update</h3>
+                <form method="POST" action="/api/promotion/{{$singlePromotion->id}}/update">
+                    @csrf
+                    <input type="text" name="coupon" class="form-control" placeholder="Coupon: "/>
+                    </br>
+                    <input type="text" name="description" class="form-control" placeholder="Description: "/>
+                    </br>
+                    <input type="number" name="amount" class="form-control" min="0" max="1250.5" step="0.5" placeholder="Amount: "/>
+                    </br>
+                    <input type="submit" class="btn btn-success"/>
+                </form>
+            </div>
         @endisset
         <hr/>
 

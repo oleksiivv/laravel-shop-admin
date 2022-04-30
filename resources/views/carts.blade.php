@@ -50,6 +50,19 @@
                 </ol>
             @endforeach
             <a href="/api/cart-item/cart/{{$singleCart->id}}">Add items</a>
+
+            <hr/>
+            <div class="alert alert-dark">
+                <h3>Update</h3>
+                <form method="POST" action="/api/cart/{{$singleCart->id}}/update">
+                    @csrf
+                    <input type="email" name="seller_email" class="form-control" placeholder="Seller: "/>
+                    </br>
+                    <input type="email" name="customer_email" class="form-control" placeholder="Customer: "/>
+                    </br>
+                    <input type="submit" class="btn btn-success"/>
+                </form>
+            </div>
         @endisset
         <hr/>
         <div class="alert alert-dark">

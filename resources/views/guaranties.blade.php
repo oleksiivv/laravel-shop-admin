@@ -56,7 +56,23 @@
             <h4>${{ $singleGuarantee->price }}</h4>
             <h5>{{ $singleGuarantee->valid_from }} - {{ $singleGuarantee->valid_till }}</h5>
             <p>{{ $singleGuarantee->description }}</p>
-            <!-- There will be edit form -->
+            <div class="alert alert-dark">
+                <h3>Update</h3>
+                <form method="POST" action="/api/product-guarantee/{{$singleGuarantee->id}}/update">
+                    @csrf
+                    <input type="text" name="name" class="form-control" placeholder="Title: "/>
+                    </br>
+                    <input type="text" name="description" class="form-control" placeholder="Description: "/>
+                    </br>
+                    <input type="datetime-local" name="valid_from" class="form-control" placeholder="Valid from: "/>
+                    </br>
+                    <input type="datetime-local" name="valid_till" class="form-control" placeholder="Valid till: "/>
+                    </br>
+                    <input type="number" name="price" class="form-control" min="0.0" step="0.5" max="1000.0" placeholder="Price: "/>
+                    </br>
+                    <input type="submit" class="btn btn-success"/>
+                </form>
+            </div>
         @endisset
         @isset($products)
             <h1>Products</h1>
