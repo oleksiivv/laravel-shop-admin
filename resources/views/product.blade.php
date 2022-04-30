@@ -46,7 +46,7 @@
         @isset($categories)
             <h1>Categories</h1>
             @foreach($categories as $category)
-                <a href="/api/product/category/{{$category->id}}/manufacturer/{{ $currentManufacturerId ?? 1 }}/guarantee/{{ $currentGuaranteeId ?? 1 }}">{{ $category->name }}</a>
+                <a href="{{ url()->current().'?'.http_build_query(array_merge(request()->all(),['category' => $category->id]))}}">{{ $category->name }}</a>
                 </br>
             @endforeach
         @endisset
@@ -54,7 +54,7 @@
         @isset($manufacturers)
             <h1>Manufacturers</h1>
             @foreach($manufacturers as $manufacturer)
-                <a href="/api/product/category/{{ $currentCategoryId ?? 1 }}/manufacturer/{{$manufacturer->id}}/guarantee/{{ $currentGuaranteeId ?? 1 }}">{{ $manufacturer->name }}</a>
+                <a href="{{ url()->current().'?'.http_build_query(array_merge(request()->all(),['manufacturer' => $manufacturer->id]))}}">{{ $manufacturer->name }}</a>
                 </br>
             @endforeach
         @endisset
@@ -62,7 +62,7 @@
         @isset($guaranties)
             <h1>Guaranties</h1>
             @foreach($guaranties as $guaranty)
-                <a href="/api/product/category/{{ $currentCategoryId ?? 1 }}/manufacturer/{{ $currentManufacturerId ?? 1 }}/guarantee/{{ $guaranty->id }}">{{ $guaranty->name }}</a>
+                <a href="{{ url()->current().'?'.http_build_query(array_merge(request()->all(),['guaranty' => $guaranty->id]))}}">{{ $guaranty->name }}</a>
                 </br>
             @endforeach
         @endisset
