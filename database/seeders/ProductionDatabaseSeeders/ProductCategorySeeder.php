@@ -1,0 +1,20 @@
+<?php
+
+namespace Database\Seeders\ProductionDatabaseSeeders;
+
+use App\Models\ProductCategory;
+use App\Models\Shop;
+use App\Models\Speciality;
+use App\Models\Worker;
+use Illuminate\Database\Eloquent\Factories\Sequence;
+use Illuminate\Database\Seeder;
+
+class ProductCategorySeeder extends Seeder
+{
+    public function run()
+    {
+        ProductCategory::factory()
+            ->count(10)
+            ->create();
+    }
+}
