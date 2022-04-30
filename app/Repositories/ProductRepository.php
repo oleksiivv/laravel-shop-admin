@@ -60,11 +60,20 @@ class ProductRepository
             ->get();
     }
 
-    public function getAll(): Collection
+    public function getAll(?string $categoryId=null, ?string $manufacturerId=null, ?string $guaranteeId=null): Collection
     {
+        $queryFilters = [];
+
+        $queryFilters['category_id'] = $categoryId;
+        $queryFilters['manufacturer_id'] = $manufacturerId;
+        $queryFilters['guarantee_id'] = $guaranteeId;
+
+        $queryFilters = array_filter($queryFilters);
+
         return Product::with('productCategory')
             ->with('productManufacturer')
             ->with('productGuarantee')
+            ->where($queryFilters)
             ->get();
     }
 

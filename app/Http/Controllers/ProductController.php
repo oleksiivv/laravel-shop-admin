@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateProductRequest;
+use App\Http\Requests\GetProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Repositories\CategoryRepository;
 use App\Repositories\GuaranteeRepository;
@@ -82,9 +83,15 @@ class ProductController extends Controller
         ]);
     }
 
-    public function showAll()
+    public function showAll(GetProductRequest $request)
     {
-        $products = $this->productRepository->getAll();
+        $filter = $request->toArray();
+
+        $categoryId = data_get($filter, 'category');
+        $manufacturerId = data_get($filter, 'manufacturer');
+        $guaranteeId = data_get($filter, 'guaranty');
+
+        $products = $this->productRepository->getAll($categoryId, $manufacturerId, $guaranteeId);
 
         $manufacturers = $this->manufacturerRepository->getAll();
         $categories = $this->categoryRepository->getAll();
@@ -95,6 +102,9 @@ class ProductController extends Controller
             'manufacturers' => $manufacturers,
             'guaranties' => $guaranties,
             'categories' => $categories,
+            'currentCategoryId' => $categoryId,
+            'currentManufacturerId' => $manufacturerId,
+            'currentGuaranteeId' => $guaranteeId,
         ]);
     }
 
