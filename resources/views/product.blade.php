@@ -53,6 +53,11 @@
                     </br>
                     <input type="submit" class="btn btn-success"/>
                 </form>
+
+                <form method="POST" action="/api/product/{{$singleProduct->id}}/delete">
+                    @csrf
+                    <input type="submit" class="btn btn-danger" value="Delete"/>
+                </form>
             </div>
         @endisset
         <hr/>

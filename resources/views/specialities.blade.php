@@ -53,6 +53,16 @@
                     </br>
                     <input type="submit" class="btn btn-success"/>
                 </form>
+
+                <form method="POST" action="/api/worker-speciality/{{$singleSpeciality->id}}/delete">
+                    @csrf
+                    <input type="submit" class="btn btn-danger" value="Delete"/>
+                </form>
+
+                <form method="POST" action="/api/worker-speciality/{{$singleSpeciality->id}}/delete">
+                    @csrf
+                    <input type="submit" class="btn btn-danger" value="Delete all workers"/>
+                </form>
             </div>
         @endisset
     </body>

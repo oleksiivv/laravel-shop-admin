@@ -49,6 +49,7 @@ class ShopController extends Controller
 
     public function delete(int $id)
     {
+        dd($id);
         $this->shopRepository->delete($id);
 
         return redirect("/api/shop");
@@ -56,6 +57,7 @@ class ShopController extends Controller
 
     public function deleteWorkers(int $id)
     {
+        dd($id);
         $this->shopRepository->deleteWorkers($id);
 
         return redirect("/api/shop/$id");

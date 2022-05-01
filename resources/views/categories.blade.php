@@ -58,6 +58,16 @@
                     </br>
                     <input type="submit" class="btn btn-success"/>
                 </form>
+
+                <form method="POST" action="/api/product-category/{{$singleCategory->id}}/delete">
+                    @csrf
+                    <input type="submit" class="btn btn-danger" value="Delete"/>
+                </form>
+
+                <form method="POST" action="/api/product-category/{{$singleCategory->id}}/products/delete">
+                    @csrf
+                    <input type="submit" class="btn btn-danger" value="Delete all products"/>
+                </form>
             </div>
         @endisset
         @isset($products)
