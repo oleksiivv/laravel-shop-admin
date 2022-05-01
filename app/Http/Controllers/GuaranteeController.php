@@ -52,7 +52,6 @@ class GuaranteeController extends Controller
 
     public function delete(int $id)
     {
-        dd($id);
         $this->guaranteeRepository->delete($id);
 
         return redirect("api/product-guarantee");
