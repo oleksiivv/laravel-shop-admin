@@ -62,6 +62,16 @@
                     </br>
                     <input type="submit" class="btn btn-success"/>
                 </form>
+
+                <form method="POST" action="/api/cart/{{$singleCart->id}}/delete">
+                    @csrf
+                    <input type="submit" class="btn btn-danger" value="Delete"/>
+                </form>
+
+                <form method="POST" action="/api/cart/{{$singleCart->id}}/cart-items/delete">
+                    @csrf
+                    <input type="submit" class="btn btn-danger" value="Delete all promotions"/>
+                </form>
             </div>
         @endisset
         <hr/>

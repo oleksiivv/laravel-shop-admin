@@ -36,8 +36,8 @@ Route::prefix('shop')->group(function () {
     Route::post('/create', [ShopController::class, 'create']);
     Route::post('/{id}/update', [ShopController::class, 'update'])->whereNumber('id');
 
-    Route::delete('/{id}', [ShopController::class, 'delete'])->whereNumber('id');
-    Route::delete('/{id}/workers', [ShopController::class, 'deleteWorkers'])->whereNumber('id');
+    Route::post('/{id}/delete', [ShopController::class, 'delete'])->whereNumber('id');
+    Route::post('/{id}/workers/delete', [ShopController::class, 'deleteWorkers'])->whereNumber('id');
 });
 
 Route::prefix('worker')->group(function () {
@@ -49,7 +49,7 @@ Route::prefix('worker')->group(function () {
     Route::post('/shop/{shopId}/speciality/{specialityId}/create', [WorkerController::class, 'create'])->whereNumber('shopId')->whereNumber('specialityId');
     Route::post('/{id}/update', [WorkerController::class, 'update'])->whereNumber('id');
 
-    Route::delete('/{id}', [WorkerController::class, 'delete'])->whereNumber('id');
+    Route::post('/{id}/delete', [WorkerController::class, 'delete'])->whereNumber('id');
 });
 
 Route::prefix('worker-speciality')->group(function () {
@@ -59,8 +59,8 @@ Route::prefix('worker-speciality')->group(function () {
     Route::post('/create', [SpecialityController::class, 'create']);
     Route::post('/{id}/update', [SpecialityController::class, 'update'])->whereNumber('id');
 
-    Route::delete('/{id}', [SpecialityController::class, 'delete'])->whereNumber('id');
-    Route::delete('/{id}/workers', [SpecialityController::class, 'deleteWorkers'])->whereNumber('id');
+    Route::post('/{id}/delete', [SpecialityController::class, 'delete'])->whereNumber('id');
+    Route::post('/{id}/workers/delete', [SpecialityController::class, 'deleteWorkers'])->whereNumber('id');
 });
 
 Route::prefix('product')->group(function () {
@@ -78,7 +78,7 @@ Route::prefix('product')->group(function () {
     Route::post('/create', [ProductController::class, 'create']);
     Route::post('/{id}/update', [ProductController::class, 'update'])->whereNumber('id');
 
-    Route::delete('/{id}', [ProductController::class, 'delete'])->whereNumber('id');
+    Route::post('/{id}/delete', [ProductController::class, 'delete'])->whereNumber('id');
 });
 
 Route::prefix('product-manufacturer')->group(function () {
@@ -89,8 +89,8 @@ Route::prefix('product-manufacturer')->group(function () {
     Route::post('/create', [ManufacturerController::class, 'create']);
     Route::post('/{id}/update', [ManufacturerController::class, 'update'])->whereNumber('id');
 
-    Route::delete('/{id}', [ManufacturerController::class, 'delete'])->whereNumber('id');
-    Route::delete('/{id}/products', [ManufacturerController::class, 'deleteProducts'])->whereNumber('id');
+    Route::post('/{id}/delete', [ManufacturerController::class, 'delete'])->whereNumber('id');
+    Route::post('/{id}/products/delete', [ManufacturerController::class, 'deleteProducts'])->whereNumber('id');
 });
 
 Route::prefix('product-category')->group(function () {
@@ -101,8 +101,8 @@ Route::prefix('product-category')->group(function () {
     Route::post('/create', [CategoryController::class, 'create']);
     Route::post('/{id}/update', [CategoryController::class, 'update'])->whereNumber('id');
 
-    Route::delete('/{id}', [CategoryController::class, 'delete'])->whereNumber('id');
-    Route::delete('/{id}/products', [CategoryController::class, 'deleteProducts'])->whereNumber('id');
+    Route::post('/{id}/delete', [CategoryController::class, 'delete'])->whereNumber('id');
+    Route::post('/{id}/products/delete', [CategoryController::class, 'deleteProducts'])->whereNumber('id');
 });
 
 Route::prefix('product-guarantee')->group(function () {
@@ -113,8 +113,8 @@ Route::prefix('product-guarantee')->group(function () {
     Route::post('/create', [GuaranteeController::class, 'create']);
     Route::post('/{id}/update', [GuaranteeController::class, 'update'])->whereNumber('id');
 
-    Route::delete('/{id}', [GuaranteeController::class, 'delete'])->whereNumber('id');
-    Route::delete('/{id}/products', [GuaranteeController::class, 'deleteProducts'])->whereNumber('id');
+    Route::post('/{id}/delete', [GuaranteeController::class, 'delete'])->whereNumber('id');
+    //Route::delete('/{id}/products', [GuaranteeController::class, 'deleteProducts'])->whereNumber('id');
 });
 
 Route::prefix('cart')->group(function () {
@@ -124,8 +124,8 @@ Route::prefix('cart')->group(function () {
     Route::post('/create', [CartController::class, 'create']);
     Route::post('/{id}/update', [CartController::class, 'update'])->whereNumber('id');
 
-    Route::delete('/{id}', [CartController::class, 'delete'])->whereNumber('id');
-    Route::delete('/{id}/cart-items', [CartController::class, 'deleteCartItems'])->whereNumber('id');
+    Route::post('/{id}/delete', [CartController::class, 'delete'])->whereNumber('id');
+    Route::post('/{id}/cart-items/delete', [CartController::class, 'deleteCartItems'])->whereNumber('id');
 });
 
 Route::prefix('cart-item')->group(function () {
@@ -141,8 +141,8 @@ Route::prefix('cart-item')->group(function () {
     Route::post('/create', [CartItemController::class, 'create']);
     Route::post('/{id}/update', [CartItemController::class, 'update'])->whereNumber('id');
 
-    Route::delete('/{id}', [CartItemController::class, 'delete'])->whereNumber('id');
-    Route::delete('/{id}/promotions', [CartItemController::class, 'deletePromotions'])->whereNumber('id');
+    Route::post('/{id}/delete', [CartItemController::class, 'delete'])->whereNumber('id');
+    Route::post('/{id}/promotions/delete', [CartItemController::class, 'deletePromotions'])->whereNumber('id');
 });
 
 Route::prefix('promotion')->group(function () {
@@ -153,7 +153,7 @@ Route::prefix('promotion')->group(function () {
     Route::post('/cart-item/{cartItemId}/create', [PromotionController::class, 'create'])->whereNumber('cartItemId');
     Route::post('/{id}/update', [PromotionController::class, 'update'])->whereNumber('id');
 
-    Route::delete('/{id}', [PromotionController::class, 'delete'])->whereNumber('id');
+    Route::post('/{id}/delete', [PromotionController::class, 'delete'])->whereNumber('id');
 });
 
 Route::prefix('order')->group(function () {
@@ -165,7 +165,7 @@ Route::prefix('order')->group(function () {
     Route::post('cart/{cartId}/create', [OrderController::class, 'create'])->whereNumber('cartId');
     Route::post('/{id}/update', [OrderController::class, 'update'])->whereNumber('id');
 
-    Route::delete('/{id}', [OrderController::class, 'delete'])->whereNumber('id');
+    //Route::delete('/{id}', [OrderController::class, 'delete'])->whereNumber('id');
 });
 
 Route::prefix('customer')->group(function () {
@@ -175,5 +175,6 @@ Route::prefix('customer')->group(function () {
     Route::post('/create', [CustomerController::class, 'create']);
     Route::post('/{id}/update', [CustomerController::class, 'update'])->whereNumber('id');
 
-    Route::delete('/{id}', [CustomerController::class, 'delete'])->whereNumber('id');
+    Route::post('/{id}/delete', [CustomerController::class, 'delete'])->whereNumber('id');
+    Route::post('/{id}/carts/delete', [CustomerController::class, 'deleteCarts'])->whereNumber('id');
 });

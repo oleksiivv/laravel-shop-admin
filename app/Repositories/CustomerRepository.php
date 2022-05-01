@@ -61,4 +61,11 @@ class CustomerRepository
 
         $customer->delete();
     }
+
+    public function deleteCarts(int $id)
+    {
+        $customer = Customer::find($id);
+
+        $customer->carts()->delete();
+    }
 }

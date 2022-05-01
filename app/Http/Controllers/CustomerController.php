@@ -47,6 +47,13 @@ class CustomerController extends Controller
     {
         $this->customerRepository->delete($id);
 
-        return redirect("/api/customer");
+        return redirect('/api/customer');
+    }
+
+    public function deleteCarts(int $id)
+    {
+        $this->customerRepository->deleteCarts($id);
+
+        return redirect("/api/customer/$id");
     }
 }

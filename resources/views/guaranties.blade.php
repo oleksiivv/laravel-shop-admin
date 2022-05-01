@@ -72,6 +72,11 @@
                     </br>
                     <input type="submit" class="btn btn-success"/>
                 </form>
+
+                <form method="POST" action="/api/product-guarantee/{{$singleGuarantee->id}}/delete">
+                    @csrf
+                    <input type="submit" class="btn btn-danger" value="Delete"/>
+                </form>
             </div>
         @endisset
         @isset($products)

@@ -75,6 +75,16 @@
                     </br>
                     <input type="submit" class="btn btn-success"/>
                 </form>
+
+                <form method="POST" action="/api/customer/{{$singleCustomer->id}}/delete">
+                    @csrf
+                    <input type="submit" class="btn btn-danger" value="Delete"/>
+                </form>
+
+                <form method="POST" action="/api/customer/{{$singleCustomer->id}}/carts/delete">
+                    @csrf
+                    <input type="submit" class="btn btn-danger" value="Delete all carts"/>
+                </form>
             </div>
         @endisset
     </body>

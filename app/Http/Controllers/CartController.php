@@ -62,10 +62,14 @@ class CartController extends Controller
     public function delete(int $id)
     {
         $this->cartRepository->delete($id);
+
+        return redirect('api/cart');
     }
 
     public function deleteCartItems(int $id)
     {
         $this->cartRepository->deleteCartItems($id);
+
+        return redirect("api/cart/$id");
     }
 }

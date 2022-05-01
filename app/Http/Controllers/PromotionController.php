@@ -64,5 +64,7 @@ class PromotionController extends Controller
     public function delete(int $id)
     {
         $this->promotionRepository->delete($id);
+
+        return redirect("/api/promotion");
     }
 }

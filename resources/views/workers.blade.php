@@ -52,6 +52,11 @@
                     </br>
                     <input type="submit" class="btn btn-success"/>
                 </form>
+
+                <form method="POST" action="/api/worker/{{$singleWorker->id}}/delete">
+                    @csrf
+                    <input type="submit" class="btn btn-danger" value="Delete"/>
+                </form>
             </div>
         @endisset
         <hr/>

@@ -98,10 +98,14 @@ class CartItemController extends Controller
     public function delete(int $id)
     {
         $this->cartItemRepository->delete($id);
+
+        return redirect('/api/cart-item');
     }
 
     public function deletePromotions(int $id)
     {
         $this->cartItemRepository->deletePromotions($id);
+
+        return redirect("/api/cart-item/$id");
     }
 }
