@@ -15,6 +15,10 @@ class ProductManufacturer extends Model
         'raiting',
     ];
 
+    protected $casts = [
+      'information' => 'json',
+    ];
+
     public function products(): HasMany
     {
         return $this->hasMany(Product::class, 'manufacturer_id');

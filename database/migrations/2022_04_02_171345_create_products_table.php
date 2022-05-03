@@ -24,6 +24,8 @@ return new class extends Migration
             $table->unsignedBigInteger('manufacturer_id')->nullable();
             $table->unsignedBigInteger('guarantee_id')->nullable();
 
+            $table->string('image_url')->nullable();
+
             $table->foreign('category_id')
                 ->references('id')
                 ->on('product_categories')

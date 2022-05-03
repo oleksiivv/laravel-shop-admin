@@ -86,9 +86,9 @@ class ProductRepository
         $product->manufacturer_id = $manufacturerId;
         $product->guarantee_id = $guaranteeId;
 
-        $product->information = json_encode([
+        $product->information = [
             'description' => $data['description'],
-        ]);
+        ];
 
         $product->save();
 
@@ -100,9 +100,9 @@ class ProductRepository
         $product = Product::where('id', $id)->first();
         $product->fill($data);
 
-        $product->information = json_encode([
+        $product->information = [
             'description' => $data['description'],
-        ]);
+        ];
 
         $product->save();
 

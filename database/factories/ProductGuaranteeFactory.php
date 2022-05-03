@@ -19,6 +19,7 @@ class ProductGuaranteeFactory extends Factory
             'description' => $this->faker->text(),
             'valid_from' => now(),
             'valid_till' => now()->addMonths($this->faker->numberBetween(6, 36)),
+            'price' => $this->faker->randomFloat(nbMaxDecimals:2, min:10, max:100),
         ];
     }
 }

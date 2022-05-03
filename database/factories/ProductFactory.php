@@ -20,9 +20,9 @@ class ProductFactory extends Factory
     {
         return [
             'name' => $this->faker->name(),
-            'information' => json_encode([
+            'information' => [
                 'description' => $this->faker->text()
-            ]),
+            ],
             'current_price' => $this->faker->numberBetween(10.5, 350.99),
             'category_id' => $this->faker->randomElement(ProductCategory::all())->id,
             'manufacturer_id' => $this->faker->randomElement(ProductManufacturer::all())->id,

@@ -10,6 +10,10 @@ class Order extends Model
 {
     use HasFactory;
 
+    protected $casts = [
+        'cart' =>'json',
+    ];
+
     public const STATUS_SUCCESS = 'successfully completed';
 
     public function customer(): BelongsTo

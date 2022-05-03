@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MainController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [MainController::class, 'home']);
+Route::get('/products-manage', [MainController::class, 'manageProducts']);
+Route::get('/shops-manage', [MainController::class, 'manageShops']);
+Route::get('/carts-manage', [MainController::class, 'manageCarts']);

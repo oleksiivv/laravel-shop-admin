@@ -27,10 +27,10 @@ class CartSeeder extends Seeder
         Order::factory()
             ->count(2)
             ->state(new Sequence(
-                ['cart' => json_encode($carts[0]->toArray())],
-                ['cart' => json_encode($carts[1]->toArray())],
-                ['cart' => json_encode($carts[2]->toArray())],
-                ['cart' => json_encode($carts[3]->toArray())],
+                ['cart' => $carts[0]->toArray()],
+                ['cart' => $carts[1]->toArray()],
+                ['cart' => $carts[2]->toArray()],
+                ['cart' => $carts[3]->toArray()],
             ))
             ->create();
     }
