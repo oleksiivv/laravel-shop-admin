@@ -37,10 +37,10 @@ class ManufacturerRepository
         $manufacturer = new ProductManufacturer();
         $manufacturer->fill($data);
 
-        $manufacturer->information = json_encode([
+        $manufacturer->information = [
             'address' => $data['address'],
             'site' => $data['site'],
-        ]);
+        ];
 
         $manufacturer->save();
 
@@ -52,10 +52,10 @@ class ManufacturerRepository
         $manufacturer = ProductManufacturer::where('id', $id)->first();
         $manufacturer->fill($data);
 
-        $manufacturer->information = json_encode([
+        $manufacturer->information = [
             'address' => $data['address'],
             'site' => $data['site'],
-        ]);
+        ];
 
         $manufacturer->save();
 

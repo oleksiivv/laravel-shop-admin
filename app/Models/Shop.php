@@ -10,7 +10,11 @@ class Shop extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['address'];
+    protected $fillable = [
+        'address',
+        'open_hour',
+        'close_hour',
+    ];
 
     public function workers(): HasMany
     {

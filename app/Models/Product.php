@@ -15,6 +15,10 @@ class Product extends Model
         'current_price',
     ];
 
+    protected $casts = [
+        'information' => 'json',
+    ];
+
     public function productCategory(): BelongsTo
     {
         return $this->belongsTo(ProductCategory::class, 'category_id');

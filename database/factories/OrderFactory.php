@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Customer;
+use App\Models\Order;
 use App\Models\Speciality;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
@@ -13,17 +14,12 @@ use JetBrains\PhpStorm\ArrayShape;
  */
 class OrderFactory extends Factory
 {
-    public const STATUS_COMPLETED = 'completed';
-    public const STATUS_FAILED = 'failed';
-    public const STATUS_PAYMENT_FAILED = 'payment_failed';
-    public const STATUS_PENDING = 'pending';
-
     public function definition(): array
     {
         return [
-            'cart' => json_encode([]),
+            'cart' => [],
             'total_price' => $this->faker->numberBetween(10.5, 1500.99),
-            'status' => self::STATUS_COMPLETED,
+            'status' => Order::STATUS_SUCCESS,
             'customer_id' => $this->faker->unique(true)->randomElement(Customer::all())->id ?? null,
         ];
     }

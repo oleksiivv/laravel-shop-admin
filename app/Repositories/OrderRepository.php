@@ -23,9 +23,11 @@ class OrderRepository
     public function create(Cart $cart, array $data): Order
     {
         $order = new Order();
-        $order->cart = json_encode($cart->toArray());
+        $order->cart = $cart->toArray();
 
-        $order->total_price = 0;
+        $order->total_price = $cart->cartItems->reduce(function ($total, $item) {
+            return $total + $item->price;
+        }, 0);
 
         $order->status = Order::STATUS_SUCCESS;
         $order->customer_id = $cart->customer->id;

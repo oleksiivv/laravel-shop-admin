@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
+use App\Models\Cart;
 use App\Repositories\CartRepository;
 use App\Repositories\OrderRepository;
 
@@ -27,6 +28,11 @@ class OrderController extends Controller
     public function showCartForCreateOrder(int $cartId)
     {
         $cart = $this->cartRepository->getById($cartId);
+
+        if($cart->status == Cart::STATUS_COMPLETED)
+        {
+            return redirect('/api/order');
+        }
 
         return view('orders', [
             'currentCartId' => $cart->id,
