@@ -37,7 +37,7 @@
                     </br>
                     <input type="datetime-local" name="valid_till" class="form-control" placeholder="Valid till: "/>
                     </br>
-                    <input type="number" name="price" class="form-control" min="0.0" step="0.5" max="1000.0" placeholder="Price: "/>
+                    <input type="number" name="price" class="form-control" min="0.0" step="0.1" max="1000.0" placeholder="Price: "/>
                     </br>
                     <input type="submit" class="btn btn-success"/>
                 </form>
@@ -79,7 +79,7 @@
                     </br>
                     <input type="datetime-local" name="valid_till" value="{{old('time')?? date('Y-m-d\TH:i', strtotime(\Carbon\Carbon::parse($singleGuarantee->valid_till)->format("d-m-YTH:i"))) }}" class="form-control" placeholder="Valid till: "/>
                     </br>
-                    <input type="number" name="price" class="form-control" value="{{ (float) $singleGuarantee->price }}" min="0.0" step="0.5" max="1000.0" placeholder="Price: "/>
+                    <input type="number" name="price" class="form-control" value="{{ (float) $singleGuarantee->price }}" min="0.0" step="0.1" max="1000.0" placeholder="Price: "/>
                     </br>
                     <input type="submit" class="btn btn-warning"/>
                 </form>

@@ -29,7 +29,7 @@ class OrderController extends Controller
     {
         $cart = $this->cartRepository->getById($cartId);
 
-        if($cart->status == Cart::STATUS_COMPLETED)
+        if($cart->status == Cart::STATUS_COMPLETED || $cart->status == Cart::STATUS_CREATED)
         {
             return redirect('/api/order');
         }

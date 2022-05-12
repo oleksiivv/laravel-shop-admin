@@ -6,6 +6,7 @@ use App\Models\Promotion;
 use App\Models\Shop;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 
 class ShopRepository
 {
@@ -49,5 +50,21 @@ class ShopRepository
         $shop = Shop::find($id);
 
         $shop->workers()->delete();
+    }
+
+    public function getMostOftenVisited()
+    {
+        $shopData = DB::select('
+            SELECT TOP 1 a.shop_id, COUNT(a.carts_count) as carts_count FROM
+            (SELECT COUNT([carts].[seller_id]) AS carts_count, [workers].[id] AS worker_id, [workers].[shop_id] from [workers]
+            LEFT JOIN [carts]
+            ON [workers].[id] = [carts].[seller_id]
+            WHERE [carts].[seller_id] IS NOT NULL
+            GROUP BY [carts].[seller_id], [workers].[id], [workers].[shop_id]) a
+            GROUP BY a.shop_id
+            ORDER BY carts_count DESC;
+        ')[0];
+
+        return $shopData;
     }
 }

@@ -47,6 +47,18 @@
             align-content: center;
             padding-top: 80px;
         }
+
+        #plots{
+            text-align: left;
+        }
+
+        .stats-block{
+            align-self: start;
+            horiz-align: left !important;
+            text-align: left;
+            vertical-align: center !important;
+            height: 150px;
+        }
     </style>
 </head>
 <body>

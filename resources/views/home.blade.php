@@ -6,16 +6,35 @@
 
 @section('content')
     <center>
-    <h1>Stats</h1>
     <div class="row" id="plots">
+        <div class="col-sm-5 alert alert-dark stats-block">
+            <h3>Last month</h3>
+            <hr/>
+            <ul>
+                <li><a href="/api/worker/{{$bestWorker->worker_id}}">Best worker ({{$bestWorker->carts_count}} carts)</a></li>
+                <li><a href="/api/shop/{{$mostVisitedShop->shop_id}}">Most visited shop ({{$mostVisitedShop->carts_count}} carts)</a></li>
+            </ul>
+        </div>
+        <div class="col-sm-1"></div>
+        <div class="col-sm-6 alert alert-dark stats-block">
+            <h3>Current stats</h3>
+            <hr/>
+            <ul>
+                <li><a href="/api/product-manufacturer/{{$bestManufacturer->id}}">Highest rated manufacturer</a></li>
+                <li><a href="/api/product-manufacturer/{{$mostPopularManufacturer->manufacturer_id}}">Most popular manufacturer</a></li>
+                <li><a href="/api/product-category/{{$mostPopularCategory->category_id}}">Most popular category</a></li>
+                <li><a href="/api/product-guarantee/{{$mostPopularGuarantee->guarantee_id}}">Most often sold guarantee</a></li>
+            </ul>
+        </div>
+        <div class="col-sm-6">
+            <center><h3>Workers sales</h3></center>
+            <canvas id="workers_sales" width="50" height="30"></canvas>
+        </div>
         <div class="col-sm-6">
             <center><h3>Workers by shop</h3></center>
             <canvas id="workers_in_shops" width="50" height="50"></canvas>
         </div>
-        <div class="col-sm-6">
-            <center><h3>Workers stats</h3></center>
-            <canvas id="workers_sales" width="50" height="50"></canvas>
-        </div>
+        <br/>
         <div class="col-sm-6">
             <center><h3>Products by manufacturer</h3></center>
             <canvas id="products_in_manufacturer" width="50" height="50"></canvas>
@@ -28,24 +47,32 @@
             <center><h3>Manufacturers raiting</h3></center>
             <canvas id="manufacturers_raiting" width="50" height="50"></canvas>
         </div>
+        <div class="col-sm-1"></div>
+        <div class="col-sm-5 alert alert-warning">
+            <h2>Top manufacturers</h2>
+            <hr/>
+            <ol>
+            @foreach($sortedManufacturers as $manufacturer)
+                    <li><a href="/api/product-manufacturer/{{$manufacturer->id}}">{{$manufacturer->name}}</a></li>
+            @endforeach
+            </ol>
+        </div>
     </div>
+        <hr/>
+        <br/><br/>
     </center>
 
     <script>
         var ctxWorkersInShop = document.getElementById('workers_in_shops').getContext('2d');
         var chartWorkersInShop = new Chart(ctxWorkersInShop, {
-            type: 'line',
+            type: 'bar',
             data: {
                 labels: @json($shopsAddress),
                 datasets: [{
                     label: 'Number of workers',
                     data: @json($workersInShopsStats),
-                    backgroundColor: [
-                        'rgba(255, 159, 64, 0.2)'
-                    ],
-                    borderColor: [
-                        'rgba(255, 159, 64, 1)'
-                    ],
+                    backgroundColor: 'rgb(252,189,202)',
+                    borderColor: 'rgb(255, 99, 132)',
                     borderWidth: 1
                 },
                 ]
@@ -63,18 +90,14 @@
 
         var ctxWorkersSales = document.getElementById('workers_sales').getContext('2d');
         var chartWorkersSales = new Chart(ctxWorkersSales, {
-            type: 'line',
+            type: 'bar',
             data: {
                 labels: @json($workers),
                 datasets: [{
                     label: 'Number of sales',
                     data: @json($workersSalesStats),
-                    backgroundColor: [
-                        'rgba(64,140,255,0.2)'
-                    ],
-                    borderColor: [
-                        'rgb(0,25,161)'
-                    ],
+                    backgroundColor: 'rgba(64,140,255,0.2)',
+                    borderColor: 'rgb(0,25,161)',
                     borderWidth: 1
                 },
                 ]
@@ -82,6 +105,18 @@
             options: {
                 scales: {
                     yAxes: [{
+                        ticks: {
+                            userCallback: function(label, index, labels) {
+                                // when the floored value is the same as the value we have a whole number
+                                if (Math.floor(label) === label) {
+                                    return label;
+                                }
+
+                            },
+                            beginAtZero: true
+                        }
+                    }],
+                    xAxes: [{
                         ticks: {
                             beginAtZero: true
                         }
@@ -98,6 +133,8 @@
                 datasets: [{
                     label: 'Raiting',
                     data: @json($manufacturersRaitings),
+                    backgroundColor: 'rgb(252,249,189)',
+                    borderColor: 'rgb(231,160,29)',
                     borderWidth: 1
                 },
                 ]
@@ -115,18 +152,14 @@
 
         var ctxProductsInCategory = document.getElementById('products_in_category').getContext('2d');
         var chartProductsInCategory = new Chart(ctxProductsInCategory, {
-            type: 'line',
+            type: 'bar',
             data: {
                 labels: @json($categories),
                 datasets: [{
                     label: 'Number of products',
                     data: @json($productsInCategoriesStats),
-                    backgroundColor: [
-                        'rgba(50,134,0,0.2)'
-                    ],
-                    borderColor: [
-                        'rgb(128,255,64)'
-                    ],
+                    backgroundColor: 'rgba(50,134,0,0.2)',
+                    borderColor: 'rgb(128,255,64)',
                     borderWidth: 1
                 },
                 ]
@@ -144,18 +177,14 @@
 
         var ctxProductsInManufacturer = document.getElementById('products_in_manufacturer').getContext('2d');
         var chartProductsInManufacturer = new Chart(ctxProductsInManufacturer, {
-            type: 'line',
+            type: 'bar',
             data: {
                 labels: @json($manufacturers),
                 datasets: [{
                     label: 'Number of products',
                     data: @json($productsInManufacturersStats),
-                    backgroundColor: [
-                        'rgba(134,0,47,0.2)'
-                    ],
-                    borderColor: [
-                        'rgb(255,118,187)'
-                    ],
+                    backgroundColor: 'rgba(217,111,111,0.2)',
+                    borderColor: 'rgb(148,3,29)',
                     borderWidth: 1
                 },
                 ]

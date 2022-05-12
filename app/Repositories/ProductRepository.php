@@ -84,7 +84,7 @@ class ProductRepository
 
         $product->category_id = $categoryId;
         $product->manufacturer_id = $manufacturerId;
-        $product->guarantee_id = $guaranteeId;
+        $product->guarantee_id = $guaranteeId == -1 ? null : $guaranteeId;
 
         $product->information = [
             'description' => $data['description'],

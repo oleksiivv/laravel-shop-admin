@@ -85,7 +85,16 @@ class CartItemController extends Controller
     public function createWithCart(int $cartId, int $productId, CreateCartItemRequest $request)
     {
         $cart = $this->cartRepository->getById($cartId);
+        $product = $this->productRepository->getById($productId);
+
+        if ($product->amount <= 0) {
+            return redirect("api/cart-item");
+        }
+
         $cartItemId = $this->cartItemRepository->create($request->toArray(), $cart, $productId)->id;
+
+        $product->amount -= 1;
+        $product->save();
 
         return redirect("api/cart-item/$cartItemId");
     }

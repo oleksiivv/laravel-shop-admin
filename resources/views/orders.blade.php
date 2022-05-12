@@ -91,10 +91,10 @@
         @isset($currentCustomerId)
             @isset($currentCartId)
                 <div class="alert alert-success">
-                    <h3>Confirm order</h3>
+                    <h3>Create order</h3>
                     <form method="POST" action="/api/order/cart/{{$currentCartId}}/create">
                         @csrf
-                        <input type="submit" value="Confirm" class="btn btn-success"/>
+                        <input type="submit" value="Submit" class="btn btn-success"/>
                     </form>
                 </div>
             @endisset

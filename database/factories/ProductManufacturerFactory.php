@@ -16,11 +16,11 @@ class ProductManufacturerFactory extends Factory
     {
         return [
             'name' => $this->faker->unique()->company(),
-            'information' => json_encode([
+            'information' => [
                 'address' => $this->faker->unique()->address(),
                 'site' => $this->faker->unique()->url(),
-            ]),
-            'raiting' => $this->faker->numberBetween(0.0, 10.0),
+            ],
+            'raiting' => $this->faker->numberBetween(0.0, 5.0),
         ];
     }
 }

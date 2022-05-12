@@ -66,7 +66,7 @@
                     <tr>
                         <th scope="row">{{$item->id}}</th>
                         <td><a href="/api/product/{{$item->product_id}}">{{$item->product->name}}</a></td>
-                        <td>${{$item->price}}</td>
+                        <td>${{(float) $item->price}}</td>
                         <td>
                             <h6>Promotions</h6>
                             <ul>
@@ -104,7 +104,7 @@
 
                 <form class="col-sm-1" method="POST" action="/api/cart/{{$singleCart->id}}/cart-items/delete">
                     @csrf
-                    <input type="submit" class="btn btn-danger" value="Delete all promotions"/>
+                    <input type="submit" class="btn btn-danger" value="Delete all items"/>
                 </form>
                 </div>
             </div>

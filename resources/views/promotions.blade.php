@@ -49,7 +49,7 @@
                         <td><a href="/api/cart/{{$cartItem->cart_id}}">{{$cartItem->cart_id}}</a></td>
                         <td><a href="/api/cart-item/{{$cartItem->id}}">{{$cartItem->id}}</a></td>
                         <td><a href="/api/product/{{$cartItem->product_id}}">{{$cartItem->product->name}}</a></td>
-                        <td>${{$cartItem->price}}</td>
+                        <td>${{(float) $cartItem->price}}</td>
                         <td>{{$cartItem->status}}</td>
                         <td><a class="btn btn-outline-success" href="/api/promotion/cart-item/{{$cartItem->id}}">Add promotion</a></td>
                     </tr>
@@ -64,7 +64,7 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Coupon</th>
-                    <th scope="col">Price</th>
+                    <th scope="col">Amount</th>
                     <th scope="col">Cart item</th>
                     <th scope="col">Description</th>
                     <th scope="col"></th>
@@ -90,9 +90,9 @@
                     </br>
                     <input type="text" name="description" class="form-control" value="{{$singlePromotion->description}}" placeholder="Description: "/>
                     </br>
-                    <input type="number" name="amount" class="form-control" value="{{$singlePromotion->amount}}" min="0" max="1250.5" step="0.5" placeholder="Amount: "/>
+                    <input type="number" name="amount" class="form-control" value="{{$singlePromotion->amount}}" min="0" max="1250.5" step="0.1" placeholder="Amount: "/>
                     </br>
-                    <input type="submit" class="btn btn-success" value="Update"/>
+                    <input type="submit" class="btn btn-warning" value="Update"/>
                 </form>
 
                 <h3>Warning</h3>
@@ -113,7 +113,7 @@
                     </br>
                     <input type="text" name="description" class="form-control" placeholder="Description: "/>
                     </br>
-                    <input type="number" name="amount" class="form-control" min="0" max="1250.5" step="0.5" placeholder="Amount: "/>
+                    <input type="number" name="amount" class="form-control" min="0" max="1250.5" step="0.1" placeholder="Amount: "/>
                     </br>
                     <input type="submit" class="btn btn-success" value="Create"/>
                 </form>

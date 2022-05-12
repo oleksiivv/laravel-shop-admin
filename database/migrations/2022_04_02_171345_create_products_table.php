@@ -25,6 +25,7 @@ return new class extends Migration
             $table->unsignedBigInteger('guarantee_id')->nullable();
 
             $table->string('image_url')->nullable();
+            $table->string('amount')->nullable();
 
             $table->foreign('category_id')
                 ->references('id')

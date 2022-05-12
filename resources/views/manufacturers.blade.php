@@ -35,7 +35,7 @@
                     </br>
                     <input type="text" name="address" class="form-control" placeholder="Address: "/>
                     </br>
-                    <input type="url" name="address" class="form-control" placeholder="Site: "/>
+                    <input type="url" name="site" class="form-control" placeholder="Site: "/>
                     </br>
                     <input type="submit" class="btn btn-success"/>
                 </form>
@@ -56,7 +56,7 @@
                 <tr>
                     <th scope="row">{{ $singleManufacturer->id }}</th>
                     <td>{{ $singleManufacturer->name }}</td>
-                    <td>{{ $singleManufacturer->raiting }}</td>
+                    <td>{{ (float) $singleManufacturer->raiting }}</td>
                     <td>{{ $singleManufacturer->information['site'] }}</td>
                     <td>{{ $singleManufacturer->information['address'] }}</td>
                 </tr>
@@ -69,7 +69,7 @@
                     @csrf
                     <input type="text" name="name" class="form-control" value="{{ $singleManufacturer->name }}" placeholder="Title: "/>
                     </br>
-                    <input type="number" name="raiting" min="0.0" max="5.0" step="0.05" class="form-control" value="{{ $singleManufacturer->raiting }}" placeholder="Raiting: "/>
+                    <input type="number" name="raiting" min="0.0" max="5.0" step="0.05" class="form-control" value="{{ (float) $singleManufacturer->raiting }}" placeholder="Raiting: "/>
                     </br>
                     <input type="text" name="address" class="form-control" value="{{ $singleManufacturer->information['address'] }}" placeholder="Address: "/>
                     </br>

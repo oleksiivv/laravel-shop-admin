@@ -38,4 +38,27 @@ class Handler extends ExceptionHandler
             //
         });
     }
+
+    /**
+     * Render an exception into an HTTP response.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Exception  $exception
+     * @return \Illuminate\Http\Response
+     */
+    public function render($request, Throwable $exception)
+    {
+        return '
+            <div
+                style="
+                background-color: #d77a7a;
+                width: 70%;
+                margin-left: 15%;
+                height: 200px;
+                border-radius: 15px"
+            >
+            <br/>
+                <center><h1 style="color: white; vertical-align: center;">Wrong data entered</h1></center>
+            </div>';
+    }
 }

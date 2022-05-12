@@ -2,11 +2,13 @@
 
 namespace App\Repositories;
 
+use App\Models\ProductCategory;
 use App\Models\Promotion;
 use App\Models\Shop;
 use App\Models\Worker;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 
 class WorkerRepository
 {
@@ -79,5 +81,19 @@ class WorkerRepository
         $worker = Worker::find($id);
 
         $worker->delete();
+    }
+
+    public function getWithMostSales()
+    {
+        $topWorkerData = DB::select('
+            select TOP 1 COUNT([carts].[seller_id]) AS carts_count, [workers].[id] AS worker_id from [workers]
+            left join [carts]
+            on [workers].[id] = [carts].[seller_id]
+            WHERE [carts].[seller_id] IS NOT NULL
+            GROUP BY [carts].[seller_id], [workers].[id]
+            ORDER BY carts_count DESC
+        ')[0];
+
+        return $topWorkerData;
     }
 }

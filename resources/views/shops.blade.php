@@ -26,7 +26,7 @@
                 </tbody>
             </table>
             <hr/>
-            <div class="alert alert-dark">
+            <div class="alert alert-success">
                 <h3>Create new shop</h3>
                 <form method="POST" action="/api/shop/create">
                     @csrf

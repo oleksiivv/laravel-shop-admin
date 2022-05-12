@@ -13,6 +13,9 @@ class Product extends Model
     protected $fillable = [
         'name',
         'current_price',
+        'image_url',
+        'guarantee_id',
+        'amount',
     ];
 
     protected $casts = [
