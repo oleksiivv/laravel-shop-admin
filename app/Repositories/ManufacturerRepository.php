@@ -8,6 +8,7 @@ use App\Models\ProductManufacturer;
 use App\Models\Speciality;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 
 class ManufacturerRepository
 {
@@ -21,6 +22,35 @@ class ManufacturerRepository
     {
         return ProductManufacturer::with('products')
             ->get();
+    }
+
+    public function getAllSortedByRaiting(): Collection
+    {
+        return ProductManufacturer::with('products')
+            ->orderByDesc('raiting')
+            ->get();
+    }
+
+    public function getHighestRaited()
+    {
+        return ProductManufacturer::with('products')
+            ->orderByDesc('raiting')
+            ->get()->first();
+    }
+
+    public function getMostPopular()
+    {
+        $topManufacturer = DB::select('
+            select TOP 1 COUNT([products].[id]) AS products_count, [product_manufacturers].[id] AS manufacturer_id
+            from [product_manufacturers]
+            left join [products]
+            on [product_manufacturers].[id] = [products].[manufacturer_id]
+            WHERE [products].[manufacturer_id] IS NOT NULL
+            GROUP BY [products].[manufacturer_id], [product_manufacturers].[id]
+            ORDER BY products_count DESC
+        ')[0];
+
+        return $topManufacturer;
     }
 
     public function getProducts(int $id): Collection

@@ -22,7 +22,9 @@ class CartSeeder extends Seeder
             ->has(
                 CartItem::factory()->count(3)->has(Promotion::factory()->count(2))
             )
-            ->count(4)->create();
+            ->count(4)->create([
+                'status' => Cart::STATUS_READY,
+            ]);
 
         Order::factory()
             ->count(2)

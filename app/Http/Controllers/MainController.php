@@ -7,6 +7,7 @@ use App\Models\ProductManufacturer;
 use App\Models\Shop;
 use App\Models\Worker;
 use App\Repositories\CategoryRepository;
+use App\Repositories\GuaranteeRepository;
 use App\Repositories\ManufacturerRepository;
 use App\Repositories\ShopRepository;
 use App\Repositories\WorkerRepository;
@@ -18,12 +19,19 @@ class MainController extends Controller
         private CategoryRepository $categoryRepository,
         private ManufacturerRepository $manufacturerRepository,
         private WorkerRepository $workerRepository,
+        private GuaranteeRepository $guaranteeRepository,
     ) {
     }
 
     public function home()
     {
+        $bestWorker = $this->workerRepository->getWithMostSales();
+
+        $mostVisitedShop = $this->shopRepository->getMostOftenVisited();
+
         return view('home', [
+            'bestWorker' => $bestWorker,
+            'mostVisitedShop' => $mostVisitedShop,
             'shopsAddress' => $this->shopRepository->getAll()->map(function (Shop $shop) {
                 return $shop->address;
             })->toArray(),
@@ -45,12 +53,21 @@ class MainController extends Controller
             'productsInManufacturersStats' => $this->manufacturerRepository->getAll()->map(function (ProductManufacturer $manufacturer) {
                 return $manufacturer->products->count();
             })->toArray(),
-            'workers' => $this->workerRepository->getAll()->map(function (Worker $worker) {
-                return $worker->email;
-            })->toArray(),
-            'workersSalesStats' => $this->workerRepository->getAll()->map(function (Worker $worker) {
+            'workers' => array_values($this->workerRepository->getAll()->filter(function (Worker $worker) {
+                    return $worker->carts->count() > 0;
+                })->map(function (Worker $worker) {
+                    return $worker->email;
+                })->toArray()),
+            'workersSalesStats' => array_values($this->workerRepository->getAll()->map(function (Worker $worker) {
                 return $worker->carts->count();
-            })->toArray(),
+            })->filter(function ($count) {
+                return $count>0;
+            })->toArray()),
+            'sortedManufacturers' => $this->manufacturerRepository->getAllSortedByRaiting(),
+            'bestManufacturer' => $this->manufacturerRepository->getHighestRaited(),
+            'mostPopularManufacturer' => $this->manufacturerRepository->getMostPopular(),
+            'mostPopularCategory' => $this->categoryRepository->getMostPopular(),
+            'mostPopularGuarantee' => $this->guaranteeRepository->getMostPopular(),
         ]);
     }
 

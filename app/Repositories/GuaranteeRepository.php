@@ -9,6 +9,7 @@ use App\Models\ProductManufacturer;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 
 class GuaranteeRepository
 {
@@ -22,6 +23,21 @@ class GuaranteeRepository
     {
         return ProductGuarantee::with('products')
             ->get();
+    }
+
+    public function getMostPopular()
+    {
+        $topCategory = DB::select('
+            select TOP 1 COUNT([products].[id]) AS products_count, [product_guarantees].[id] AS guarantee_id
+            from [product_guarantees]
+            left join [products]
+            on [product_guarantees].[id] = [products].[guarantee_id]
+            WHERE [products].[guarantee_id] IS NOT NULL
+            GROUP BY [products].[category_id], [product_guarantees].[id]
+            ORDER BY products_count DESC
+        ')[0];
+
+        return $topCategory;
     }
 
     public function create(array $data): ProductGuarantee

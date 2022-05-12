@@ -96,8 +96,8 @@
                 <tr>
                     <th scope="row">{{$singleCartItem->id}}</th>
                     <td><a href="/api/product/{{$singleCartItem->product_id}}">{{$singleCartItem->product->name}}</a></td>
-                    <td>${{ $singleCartItem->price }}</td>
-                    <td>${{ $singleCartItem->product->current_price }}</td>
+                    <td>${{ (float) $singleCartItem->price }}</td>
+                    <td>${{ (float) $singleCartItem->product->current_price }}</td>
                     <td><a href="/api/cart/{{$singleCartItem->cart_id}}">Id: {{ $singleCartItem->cart_id }}<br/>Status: {{$singleCartItem->cart->status}}</a></td>
                     <td>
                         <ul>
@@ -115,7 +115,7 @@
                 <h3>Update</h3>
                 <form method="POST" action="/api/cart-item/{{$singleCartItem->id}}/update">
                     @csrf
-                    <input type="number" name="price" class="form-control" value="{{ $singleCartItem->price }}" placeholder="Current price: "/>
+                    <input type="number" name="price" class="form-control" value="{{ $singleCartItem->price }}" step="0.1" placeholder="Current price: "/>
                     </br>
                     <input type="submit" class="btn btn-warning"/>
                 </form>
@@ -144,13 +144,17 @@
                         <th scope="col">Cart</th>
                         <th scope="col">Product</th>
                         <th scope="col">Product price</th>
+                        <th scope="col">Guarantee price</th>
+                        <th scope="col">Amount in stock</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr>
                         <td><a href="/api/cart/{{$currentCart->id}}">Id: {{ $currentCart->id }}<br/>Status: {{$currentCart->status}}</a></td>
                         <td><a href="/api/product/{{$currentProduct->id}}">{{$currentProduct->name}}</a></td>
-                        <td>${{ $currentProduct->current_price }}</td>
+                        <td>${{ (float) $currentProduct->current_price }}</td>
+                        <td><a href="/api/product-guarantee/{{$currentProduct->productGuarantee->id}}">${{ (float) $currentProduct->productGuarantee->price }}</td>
+                        <td>{{ $currentProduct->amount }}</td>
                     </tr>
                     </tbody>
                 </table>
@@ -158,7 +162,7 @@
                     <h3>Add to cart</h3>
                     <form method="POST" action="/api/cart-item/cart/{{$currentCart->id}}/product/{{$currentProduct->id}}/create">
                         @csrf
-                        <input type="number" name="price" class="form-control" placeholder="Current price: "/>
+                        <input type="number" name="price" step="0.1" class="form-control" placeholder="Current price: "/>
                         </br>
                         <input type="submit" class="btn btn-success" value="Submit"/>
                     </form>

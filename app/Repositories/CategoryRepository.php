@@ -9,6 +9,7 @@ use App\Models\ProductGuarantee;
 use App\Models\ProductManufacturer;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 
 class CategoryRepository
 {
@@ -22,6 +23,21 @@ class CategoryRepository
     {
         return ProductCategory::with('products')
             ->get();
+    }
+
+    public function getMostPopular()
+    {
+        $topCategory = DB::select('
+            select TOP 1 COUNT([products].[id]) AS products_count, [product_categories].[id] AS category_id
+            from [product_categories]
+            left join [products]
+            on [product_categories].[id] = [products].[category_id]
+            WHERE [products].[category_id] IS NOT NULL
+            GROUP BY [products].[category_id], [product_categories].[id]
+            ORDER BY products_count DESC
+        ')[0];
+
+        return $topCategory;
     }
 
     public function create(array $data): ProductCategory

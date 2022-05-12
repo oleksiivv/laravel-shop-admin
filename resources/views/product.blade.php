@@ -35,21 +35,25 @@
         @endisset
         @isset($currentCategoryId)
             @isset($currentManufacturerId)
-                @isset($currentGuaranteeId)
+                {{--@isset($currentGuaranteeId)--}}
                     <div class="alert alert-success">
                         <h3>Create new product</h3>
-                        <form method="POST" action="/api/product/category/{{ $currentCategoryId }}/manufacturer/{{ $currentManufacturerId ?? 1 }}/guarantee/{{ $currentGuaranteeId ?? 1 }}/create">
+                        <form method="POST" action="/api/product/category/{{ $currentCategoryId }}/manufacturer/{{ $currentManufacturerId ?? 1 }}/guarantee/{{ $currentGuaranteeId ?? -1 }}/create">
                             @csrf
                             <input type="text" name="name" class="form-control" placeholder="Title: "/>
                             </br>
                             <input type="text" name="description" class="form-control" placeholder="Description: "/>
                             </br>
-                            <input type="number" name="current_price" class="form-control" placeholder="Current price: "/>
+                            <input type="number" name="current_price" class="form-control" step="0.1" placeholder="Current price: "/>
                             </br>
-                            <input type="submit" class="btn btn-success"/>
+                            <input type="number" name="amount" class="form-control" placeholder="Amount: "/>
+                            </br>
+                            <input type="url" name="image_url" class="form-control" placeholder="Image: "/>
+                            </br>
+                            <input type="submit" class="btn btn-success" value="Create"/>
                         </form>
                     </div>
-                @endisset
+                {{--@endisset--}}
             @endisset
         @endisset
         @isset($singleProduct)
@@ -58,6 +62,8 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Name</th>
+                    <th scope="col">Amount in stock</th>
+                    <th scope="col">Icon</th>
                     <th scope="col">Current price</th>
                     <th scope="col">Category</th>
                     <th scope="col">Guarantee</th>
@@ -69,9 +75,11 @@
                 <tr>
                     <th scope="row">{{ $singleProduct->id }}</th>
                     <td>{{ $singleProduct->name }}</td>
+                    <td>{{ $singleProduct->amount }}</td>
+                    <td><img width="80px" src="{{  $singleProduct->image_url }}" alt="No icon"/></td>
                     <td>{{ $singleProduct->current_price }}</td>
                     <td><a href="/api/product-category/{{$singleProduct->category_id}}">{{ $singleProduct->productCategory->name }}</a></td>
-                    <td><a href="/api/product-guarantee/{{$singleProduct->guarantee_id}}">{{ $singleProduct->productGuarantee->name }}</a></td>
+                    <td><a href="/api/product-guarantee/{{$singleProduct?->guarantee_id}}">{{ $singleProduct?->productGuarantee?->name }}</a></td>
                     <td><a href="/api/product-manufacturer/{{$singleProduct->manufacturer_id}}">{{ $singleProduct->productManufacturer->name }}</a></td>
                     <td>{{ $singleProduct->information['description'] }}</td>
                 </tr>
@@ -86,9 +94,16 @@
                     </br>
                     <input type="text" name="description" class="form-control" value="{{ $singleProduct->information['description'] }}" placeholder="Description: "/>
                     </br>
-                    <input type="number" name="current_price" class="form-control" value="{{ (float) $singleProduct->current_price }}" placeholder="Current price: "/>
+                    <input type="number" step="0.1" name="current_price" class="form-control" value="{{ (float) $singleProduct->current_price }}" placeholder="Current price: "/>
                     </br>
-                    <input type="submit" class="btn btn-warning"/>
+                    <input type="number" name="amount" value="{{$singleProduct->amount}}" class="form-control" placeholder="Amount: "/>
+                    </br>
+                    <input type="url" name="image_url" class="form-control" value="{{ $singleProduct->image_url }}" placeholder="Image: "/>
+                    </br>
+                    Guarantee:<br/>
+                    <input type="number" name="guarantee_id" class="form-control" value="{{ (float) $singleProduct->guarantee_id }}" placeholder="Guarantee id: "/>
+                    </br>
+                    <input type="submit" class="btn btn-warning" value="Update"/>
                 </form>
 
                 <h3>Warning</h3>
