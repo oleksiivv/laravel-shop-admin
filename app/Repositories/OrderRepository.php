@@ -26,7 +26,15 @@ class OrderRepository
         $order->cart = $cart->toArray();
 
         $order->total_price = $cart->cartItems->reduce(function ($total, $item) {
-            return $total + $item->price;
+            $promotionAmounts = $item->promotions->map(function (Promotion $promotion) {
+                return $promotion->amount;
+            });
+
+            $promotionsAmount = $promotionAmounts->reduce(function ($total, $item) {
+                return $total+$item;
+            }, 0);
+
+            return $total + $item->price - $promotionsAmount;
         }, 0);
 
         $order->status = Order::STATUS_SUCCESS;

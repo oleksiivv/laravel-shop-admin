@@ -92,6 +92,7 @@
             @isset($currentCartId)
                 <div class="alert alert-success">
                     <h3>Create order</h3>
+                    <h4><i><a class="btn btn-outline-success" href="/api/cart/{{$currentCartId}}">View cart</a></i></h4>
                     <form method="POST" action="/api/order/cart/{{$currentCartId}}/create">
                         @csrf
                         <input type="submit" value="Submit" class="btn btn-success"/>
